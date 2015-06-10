@@ -23,6 +23,7 @@ type XnaGame() as this =
         graphicsDeviceManager.PreferredBackBufferWidth <- 640
         graphicsDeviceManager.PreferredBackBufferHeight <- 480
         graphicsDeviceManager.ApplyChanges() 
+        game.GraphicsDevice.SamplerStates.[0] <- SamplerState.PointClamp
         base.Initialize()
         initializeEvent.Trigger ()
     override game.LoadContent() =
@@ -32,7 +33,7 @@ type XnaGame() as this =
         loopEvent.Trigger (Update gameTime)
 
     override game.Draw gameTime = 
-        game.GraphicsDevice.Clear(Color.CornflowerBlue)
+        game.GraphicsDevice.Clear(Color.Black)
         loopEvent.Trigger (Draw gameTime)
 
     member game.LoadAsync = Async.AwaitEvent loadEvent.Publish
